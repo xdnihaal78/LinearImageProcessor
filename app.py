@@ -52,7 +52,7 @@ if uploaded_file is not None:
     
     # Display original image
     st.header("Original Image")
-    st.image(img_array, caption="Original Image", use_column_width=True)
+    st.image(img_array, caption="Original Image", use_container_width=True)
     
     # Display image information
     display_image_matrix_info(img_array)
@@ -80,7 +80,7 @@ if uploaded_file is not None:
             with col1:
                 st.subheader("Grayscale Conversion")
                 gray_img = convert_to_grayscale(img_array)
-                st.image(gray_img, caption="Grayscale Image", use_column_width=True)
+                st.image(gray_img, caption="Grayscale Image", use_container_width=True)
                 st.write(f"Matrix shape: {gray_img.shape}")
                 
                 # Show a small portion of the matrix
@@ -92,7 +92,7 @@ if uploaded_file is not None:
             with col2:
                 st.subheader("RGB Conversion")
                 rgb_img = convert_to_rgb(img_array)
-                st.image(rgb_img, caption="RGB Image", use_column_width=True)
+                st.image(rgb_img, caption="RGB Image", use_container_width=True)
                 st.write(f"Matrix shape: {rgb_img.shape}")
                 
                 # Show separate channels
@@ -149,7 +149,7 @@ if uploaded_file is not None:
             
             with col2:
                 transformed_img = scale_image(working_img, scale_x, scale_y)
-                st.image(transformed_img, caption=f"Scaled Image (x: {scale_x}, y: {scale_y})", use_column_width=True)
+                st.image(transformed_img, caption=f"Scaled Image (x: {scale_x}, y: {scale_y})", use_container_width=True)
         
         elif transform_type == "Rotation":
             col1, col2 = st.columns(2)
@@ -170,7 +170,7 @@ if uploaded_file is not None:
             
             with col2:
                 transformed_img = rotate_image(working_img, angle)
-                st.image(transformed_img, caption=f"Rotated Image ({angle}°)", use_column_width=True)
+                st.image(transformed_img, caption=f"Rotated Image ({angle}°)", use_container_width=True)
         
         elif transform_type == "Shearing":
             col1, col2 = st.columns(2)
@@ -189,7 +189,7 @@ if uploaded_file is not None:
             
             with col2:
                 transformed_img = shear_image(working_img, shear_x, shear_y)
-                st.image(transformed_img, caption=f"Sheared Image (x: {shear_x}, y: {shear_y})", use_column_width=True)
+                st.image(transformed_img, caption=f"Sheared Image (x: {shear_x}, y: {shear_y})", use_container_width=True)
     
     # Tab 3: SVD Compression
     with tabs[2]:
@@ -252,14 +252,14 @@ if uploaded_file is not None:
             st.pyplot(fig)
             
         with col2:
-            st.image(compressed_img, caption=f"Compressed Image (k={k})", use_column_width=True)
+            st.image(compressed_img, caption=f"Compressed Image (k={k})", use_container_width=True)
             
             # Calculate and display the error
             error_img = np.abs(working_img.astype(float) - compressed_img.astype(float))
             error_img = (error_img / error_img.max() * 255).astype(np.uint8)
             
             st.subheader("Error Visualization")
-            st.image(error_img, caption="Error (darker = more accurate)", use_column_width=True)
+            st.image(error_img, caption="Error (darker = more accurate)", use_container_width=True)
 
     # Tab 4: Edge Detection
     with tabs[3]:
@@ -348,7 +348,7 @@ if uploaded_file is not None:
             elif edge_method == "Canny":
                 edges = detect_edges(working_img, method="canny", threshold1=threshold1, threshold2=threshold2)
             
-            st.image(edges, caption=f"Edge Detection using {edge_method}", use_column_width=True)
+            st.image(edges, caption=f"Edge Detection using {edge_method}", use_container_width=True)
 
 else:
     # Display placeholder when no image is uploaded
